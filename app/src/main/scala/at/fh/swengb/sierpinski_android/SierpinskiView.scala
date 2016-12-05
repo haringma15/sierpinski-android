@@ -16,24 +16,24 @@ class SierpinskiView(val context: Context, val attrs: AttributeSet) extends View
   override protected def onDraw(canvas: Canvas) {
     super.onDraw(canvas)
 
-    val width = canvas.getWidth
-    val height = Math.sqrt(width * width - width/2 * width/2).toFloat
+    val x = canvas.getWidth
+    val y = Math.sqrt(x * x - x/2 * x/2).toFloat
 
-    drawTriangle(canvas, width, height)
-    drawSubTriangle(canvas, depth, width/2, height/2)
+    drawTriangle(canvas, x, y)
+    drawSubTriangle(canvas, depth, x, y)
   }
 
-  def drawTriangle(canvas: Canvas, width: Float, height: Float) = {
-    canvas.drawLine(0, height, width, height, paint)
-    canvas.drawLine(width, height, width/2, 0, paint)
-    canvas.drawLine(0, height, width/2, 0, paint)
+  def drawTriangle(canvas: Canvas, x: Float, y: Float) = {
+    canvas.drawLine(0, y, x, y, paint)
+    canvas.drawLine(x, y, x/2, 0, paint)
+    canvas.drawLine(0, y, x/2, 0, paint)
   }
 
-  def drawSubTriangle(canvas: Canvas, depth: Int, width: Float, height: Float): Unit = {
+  def drawSubTriangle(canvas: Canvas, depth: Int, x: Float, y: Float): Unit = {
     if (depth > 0){
-      canvas.drawLine(0, depth, depth + 500, depth + 600, paint)
-      canvas.drawLine(0, depth, depth + 500, depth + 600, paint)
-      canvas.drawLine(0, depth, depth + 500, depth + 600, paint)
+      canvas.drawLine(x/2, y, x/4, y/2, paint)
+      canvas.drawLine(x/2, y, x/4*3, y/2, paint)
+      canvas.drawLine(x/4, y/2, x/4*3, y/2, paint)
       val newDepth = depth - 1
       val newWidth = 1
       val newHeight = 1
