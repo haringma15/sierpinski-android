@@ -11,7 +11,7 @@ import android.view.View
 class SierpinskiView(val context: Context, val attrs: AttributeSet) extends View(context, attrs) {
 
   val paint = new Paint()
-  val depth = 2
+  val depth = 7
 
   override protected def onDraw(canvas: Canvas) {
     super.onDraw(canvas)
@@ -19,25 +19,26 @@ class SierpinskiView(val context: Context, val attrs: AttributeSet) extends View
     val x = canvas.getWidth
     val y = Math.sqrt(x * x - x/2 * x/2).toFloat
 
-    drawTriangle(canvas, x, y)
-    drawSubTriangle(canvas, depth, x/2, x/4, x/4*3, y, y/2)
+    drawSierpinski(canvas, 0, y, x/2, 0, x, y)
   }
 
-  def drawTriangle(canvas: Canvas, x: Float, y: Float) = {
-    canvas.drawLine(0, y, x, y, paint)
-    canvas.drawLine(x, y, x/2, 0, paint)
-    canvas.drawLine(0, y, x/2, 0, paint)
+  def drawSierpinski(canvas: Canvas, x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) = {
+    canvas.drawLine(x1, y1, x2, y2, paint)
+    canvas.drawLine(x2, y2, x3, y3, paint)
+    canvas.drawLine(x3, y3, x1, y1, paint)
+
+    drawSubTriangle(canvas, depth, (x1 + x2)/2, (y1 + y2)/2, (x1 + x3)/2, (y1 + y3)/2, (x2 + x3)/2, (y2 + y3)/2)
   }
 
-  def drawSubTriangle(canvas: Canvas, depth: Int, a: Float, b: Float, c: Float, y1: Float, y2: Float): Unit = {
+  def drawSubTriangle(canvas: Canvas, depth: Int, x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float): Unit = {
     if (depth > 0){
-      canvas.drawLine(a, y1, b, y2, paint)
-      canvas.drawLine(b, y2, c, y2, paint)
-      canvas.drawLine(c, y2, a, y1, paint)
+      canvas.drawLine(x1, y1, x2, y2, paint)
+      canvas.drawLine(x2, y2, x3, y3, paint)
+      canvas.drawLine(x3, y3, x1, y1, paint)
       val newDepth = depth - 1
-      drawSubTriangle(canvas, newDepth, a/2, b/2, c/2, y1, y2/2*3)
-      drawSubTriangle(canvas, newDepth, a/2*3, b/2*5, c/6*7, y1, y2/2*3)
-      drawSubTriangle(canvas, newDepth, a, b/2*3, c/6*5, y2, y2/2)
+      drawSubTriangle(canvas, newDepth, (x1 + x2)/2 + (x2 - x3)/2, (y1 + y2)/2 + (y2 - y3)/2, (x1 + x2)/2 + (x1 - x3)/2, (y1 + y2)/2 + (y1 - y3)/2, (x1 + x2)/2, (y1 + y2)/2)
+      drawSubTriangle(canvas, newDepth, (x3 + x2)/2 + (x2 - x1)/2, (y3 + y2)/2 + (y2 - y1)/2, (x3 + x2)/2 + (x3 - x1)/2, (y3 + y2)/2 + (y3 - y1)/2, (x3 + x2)/2, (y3 + y2)/2)
+      drawSubTriangle(canvas, newDepth, (x1 + x3)/2 + (x3 - x2)/2, (y1 + y3)/2 + (y3 - y2)/2, (x1 + x3)/2 + (x1 - x2)/2, (y1 + y3)/2 + (y1 - y2)/2, (x1 + x3)/2, (y1 + y3)/2)
     }
   }
 }
