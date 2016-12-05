@@ -1,8 +1,7 @@
 package at.fh.swengb.sierpinski_android
 
-import android.app.Notification.Style
 import android.content.Context
-import android.graphics.{Canvas, Color, Paint, Path}
+import android.graphics.{Canvas, Paint}
 import android.util.AttributeSet
 import android.view.View
 
@@ -15,29 +14,19 @@ class SierpinskiView(val context: Context, val attrs: AttributeSet) extends View
 
   override protected def onDraw(canvas: Canvas) {
     super.onDraw(canvas)
-    
-    drawTriangle(canvas)
-    drawSubTrianlge(canvas)
 
+    drawTriangle(canvas)
+    drawSubTriangle(canvas)
   }
 
   def drawTriangle(canvas: Canvas) = {
-
-    canvas.drawLine(0, Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat,canvas.getWidth(),Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat,paint)
-    canvas.drawLine(canvas.getWidth(), Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat, canvas.getWidth()/2, 0,paint)
-    canvas.drawLine(0, Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat, canvas.getWidth()/2, 0,paint)
-
+    canvas.drawLine(0, Math.sqrt(canvas.getWidth * canvas.getWidth - canvas.getWidth/2 * canvas.getWidth/2).toFloat,canvas.getWidth(),Math.sqrt(canvas.getWidth * canvas.getWidth - canvas.getWidth/2 * canvas.getWidth/2).toFloat,paint)
+    canvas.drawLine(canvas.getWidth(), Math.sqrt(canvas.getWidth * canvas.getWidth - canvas.getWidth/2 * canvas.getWidth/2).toFloat, canvas.getWidth/2, 0,paint)
+    canvas.drawLine(0, Math.sqrt(canvas.getWidth * canvas.getWidth- canvas.getWidth/2 * canvas.getWidth/2).toFloat, canvas.getWidth/2, 0,paint)
   }
 
-  def drawSubTrianlge(canvas: Canvas) = {
+  def drawSubTriangle(canvas: Canvas) = {
+    val counter = 0
 
-    paint.setColor(Color.BLUE)
-
-    val path = new Path()
-
-    path.moveTo(50,0)
-    path.lineTo(0,50)
-    path.close()
-    canvas.drawPath(path, paint)
   }
 }
