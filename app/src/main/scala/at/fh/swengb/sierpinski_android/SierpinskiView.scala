@@ -15,36 +15,17 @@ class SierpinskiView(val context: Context, val attrs: AttributeSet) extends View
 
   override protected def onDraw(canvas: Canvas) {
     super.onDraw(canvas)
-
-    // drawACircle(canvas)
+    
     drawTriangle(canvas)
     drawSubTrianlge(canvas)
 
   }
 
-  /* drawing a circle, for testing purposes
-
-  def drawACircle(canvas: Canvas) = {
-    val x: Int = getWidth();
-    val y: Int = getHeight();
-    val radius: Int = 100;
-    paint.setColor(Color.WHITE)
-    paint.setStyle(Paint.Style.FILL)
-    canvas.drawPaint(paint)
-    paint.setColor(Color.parseColor("#CD5C5C"))
-    canvas.drawCircle(x/2, y/2, radius, paint)
-  } */
-
   def drawTriangle(canvas: Canvas) = {
 
-    paint.setColor(Color.BLACK)
-
-    val path = new Path()
-
-    path.moveTo(0,0)
-    path.lineTo(100,100)
-    path.close()
-    canvas.drawPath(path, paint)
+    canvas.drawLine(0, Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat,canvas.getWidth(),Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat,paint)
+    canvas.drawLine(canvas.getWidth(), Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat, canvas.getWidth()/2, 0,paint)
+    canvas.drawLine(0, Math.sqrt(canvas.getWidth() * canvas.getWidth() - canvas.getWidth()/2 * canvas.getWidth()/2).toFloat, canvas.getWidth()/2, 0,paint)
 
   }
 
