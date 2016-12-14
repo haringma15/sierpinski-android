@@ -16,8 +16,7 @@ class SierpinskiView(val context: Context, val attrs: AttributeSet) extends View
 
     val x = canvas.getWidth
     val y = Math.sqrt(x * x - x/2 * x/2).toFloat
-    val padding = 50
-    drawSierpinski(canvas, 0, y+padding, x/2, padding, x, y+padding)
+    drawSierpinski(canvas, 0, y, x/2, 0, x, y)
   }
 
   def drawSierpinski(canvas: Canvas, x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) = {
